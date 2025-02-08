@@ -6,12 +6,21 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+print("DATABASE SETTINGS:")
+print("NAME:", os.getenv("DATABASE_NAME"))
+print("DATABASE_USER:", os.getenv("DATABASE_USER"))
+print("DATABASE_PASSWORD:", os.getenv("DATABASE_PASSWORD"))
+print("HOST:", os.getenv("DATABASE_HOST"))
+print("PORT:", os.getenv("DATABASE_PORT"))
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 INSTALLED_APPS = [
     'modeltranslation',
@@ -66,8 +75,8 @@ DATABASES = {
         'NAME': os.getenv('DATABASE_NAME'),
         'USER': os.getenv('DATABASE_USER'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
-        'PORT': os.getenv('DATABASE_PORT', '3306'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
